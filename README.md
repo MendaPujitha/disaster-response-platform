@@ -1,1 +1,2 @@
-# disaster-response-platform
+# Disaster Response Coordination Platform
+This project is built using MERN stack...
