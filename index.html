@@ -1,1 +1,37 @@
 <!-- Frontend HTML placeholder -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Report</title>
+</head>
+<body>
+  <h1>Create Disaster</h1>
+  <form id="disasterForm">
+    <input type="text" id="title" placeholder="Title" required><br>
+    <input type="text" id="location" placeholder="Location Name" required><br>
+    <textarea id="description" placeholder="Description"></textarea><br>
+    <input type="text" id="tags" placeholder="Comma-separated tags"><br>
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById('disasterForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const location_name = document.getElementById('location').value;
+      const description = document.getElementById('description').value;
+      const tags = document.getElementById('tags').value.split(',').map(t => t.trim());
+
+      const response = await fetch('http://localhost:3000/disasters', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, location_name, description, tags })
+      });
+
+      const result = await response.json();
+      alert('Disaster Created: ' + JSON.stringify(result));
+    });
+  </script>
+</body>
+</html>
